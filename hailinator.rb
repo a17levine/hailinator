@@ -14,10 +14,10 @@ end
 
 
 CSV.open("haildamage.csv", "wb") do |csv|
-	csv << ["Date Created", "Tweet", "Username"]
+	csv << ["handle", "text", "url"]
 
 	Twitter.search("#hail" "#rain", :lang => "en", :count => 10).results.each do |tweet|
-		csv << [tweet.created_at, tweet.full_text, tweet.from_user]
+		csv << [tweet.from_user, tweet.full_text, "https://twitter.com/#{tweet.from_user}/statuses/#{tweet.id}"]
 	end
 end
 
