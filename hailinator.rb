@@ -1,4 +1,5 @@
 require 'twitter'
+require 'csv'
 
 
 
@@ -12,4 +13,13 @@ end
 # Twitter.update("I'm tweeting with @gem!")
 
 
-Twitter.search("#hail", :lang => "en", :count => 10).results.first.text
+CSV.open("haildamage.csv", "wb") do |csv|
+	csv << ["Date Created", "Tweet", "Username"]
+
+	Twitter.search("#hail" "#rain", :lang => "en", :count => 10).results.each do |tweet|
+		csv << [tweet.created_at, tweet.full_text, tweet.from_user]
+	end
+end
+
+
+
